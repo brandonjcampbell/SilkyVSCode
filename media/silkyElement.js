@@ -37,10 +37,21 @@
 		}
 		notesContainer.style.display = '';
 		errorContainer.style.display = 'none';
-		
 
-		// Render the scratches
-		notesContainer.innerHTML = 'Element Editor!';
+		notesContainer.innerHTML='';
+		const name = document.createElement('h1');
+		name.className = 'note';
+		name.contentEditable= 'true'
+		name.innerHTML = json.name
+		notesContainer.appendChild(name);
+
+		const textEditor = document.createElement('div');
+		textEditor.className = 'textEditor';
+		textEditor.contentEditable= 'true'
+		textEditor.innerHTML = json.name
+		notesContainer.appendChild(textEditor);
+
+
 		for (const note of json.scratches || []) {
 			const element = document.createElement('div');
 			element.className = 'note';
