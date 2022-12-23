@@ -13,15 +13,15 @@ import { getNonce } from './util';
  * - Loading scripts and styles in a custom editor.
  * - Synchronizing changes between a text document and a custom editor.
  */
-export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider {
+export class SilkyElementEditorProvider implements vscode.CustomTextEditorProvider {
 
 	public static register(context: vscode.ExtensionContext): vscode.Disposable {
-		const provider = new CatScratchEditorProvider(context);
-		const providerRegistration = vscode.window.registerCustomEditorProvider(CatScratchEditorProvider.viewType, provider);
+		const provider = new SilkyElementEditorProvider(context);
+		const providerRegistration = vscode.window.registerCustomEditorProvider(SilkyElementEditorProvider.viewType, provider);
 		return providerRegistration;
 	}
 
-	private static readonly viewType = 'catCustoms.catScratch';
+	private static readonly viewType = 'silky.element';
 
 	private static readonly scratchCharacters = ['😸', '😹', '😺', '😻', '😼', '😽', '😾', '🙀', '😿', '🐱'];
 
@@ -93,16 +93,13 @@ export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider
 	private getHtmlForWebview(webview: vscode.Webview): string {
 		// Local path to script and css for the webview
 		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(
-			this.context.extensionUri, 'media', 'catScratch.js'));
-
-		const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(
-			this.context.extensionUri, 'media', 'reset.css'));
+			this.context.extensionUri, 'media', 'silkyElement.js'));
 
 		const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(
 			this.context.extensionUri, 'media', 'vscode.css'));
 
 		const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(
-			this.context.extensionUri, 'media', 'catScratch.css'));
+			this.context.extensionUri, 'media', 'silkyElement.css'));
 
 		// Use a nonce to whitelist which scripts can be run
 		const nonce = getNonce();
@@ -121,19 +118,14 @@ export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider
 
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-				<link href="${styleResetUri}" rel="stylesheet" />
 				<link href="${styleVSCodeUri}" rel="stylesheet" />
 				<link href="${styleMainUri}" rel="stylesheet" />
 
-				<title>Cat Scratch</title>
+				<title>Silky Element</title>
 			</head>
 			<body>
-				<div class="notes">
-					<div class="add-button">
-						<button>Scratch!</button>
-					</div>
+				<div class="content">
 				</div>
-				
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`;
@@ -144,7 +136,7 @@ export class CatScratchEditorProvider implements vscode.CustomTextEditorProvider
 	 */
 	private addNewScratch(document: vscode.TextDocument) {
 		const json = this.getDocumentAsJson(document);
-		const character = CatScratchEditorProvider.scratchCharacters[Math.floor(Math.random() * CatScratchEditorProvider.scratchCharacters.length)];
+		const character = SilkyElementEditorProvider.scratchCharacters[Math.floor(Math.random() * SilkyElementEditorProvider.scratchCharacters.length)];
 		json.scratches = [
 			...(Array.isArray(json.scratches) ? json.scratches : []),
 			{

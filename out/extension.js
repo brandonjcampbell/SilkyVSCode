@@ -1,12 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = void 0;
-const catScratchEditor_1 = require("./catScratchEditor");
-const pawDrawEditor_1 = require("./pawDrawEditor");
+const silkyElementEditor_1 = require("./silkyElementEditor");
 function activate(context) {
     // Register our custom editor providers
-    context.subscriptions.push(catScratchEditor_1.CatScratchEditorProvider.register(context));
-    context.subscriptions.push(pawDrawEditor_1.PawDrawEditorProvider.register(context));
+    context.subscriptions.push(silkyElementEditor_1.SilkyElementEditorProvider.register(context));
 }
 exports.activate = activate;
 //# sourceMappingURL=extension.js.map

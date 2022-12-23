@@ -10,14 +10,9 @@
 	const vscode = acquireVsCodeApi();
 
 
-	const notesContainer = /** @type {HTMLElement} */ (document.querySelector('.notes'));
+	const notesContainer = /** @type {HTMLElement} */ (document.querySelector('.content'));
 
-	const addButtonContainer = document.querySelector('.add-button');
-	addButtonContainer.querySelector('button').addEventListener('click', () => {
-		vscode.postMessage({
-			type: 'add'
-		});
-	})
+
 
 	const errorContainer = document.createElement('div');
 	document.body.appendChild(errorContainer);
@@ -42,9 +37,10 @@
 		}
 		notesContainer.style.display = '';
 		errorContainer.style.display = 'none';
+		
 
 		// Render the scratches
-		notesContainer.innerHTML = '';
+		notesContainer.innerHTML = 'Element Editor!';
 		for (const note of json.scratches || []) {
 			const element = document.createElement('div');
 			element.className = 'note';
@@ -60,17 +56,9 @@
 			const created = document.createElement('div');
 			created.className = 'created';
 			created.innerText = new Date(note.created).toUTCString();
-			element.appendChild(created);
-
-			const deleteButton = document.createElement('button');
-			deleteButton.className = 'delete-button';
-			deleteButton.addEventListener('click', () => {
-				vscode.postMessage({ type: 'delete', id: note.id, });
-			});
-			element.appendChild(deleteButton);
+			element.appendChild(created);;
 		}
 
-		notesContainer.appendChild(addButtonContainer);
 	}
 
 	// Handle messages sent from the extension to the webview

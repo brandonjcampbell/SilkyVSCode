@@ -21,30 +21,53 @@
 	"contributes": {
 		"customEditors": [
 			{
-				"viewType": "catCustoms.catScratch",
-				"displayName": "Cat Scratch",
+				"viewType": "silky.element",
+				"displayName": "Silky Element",
 				"selector": [
 					{
-						"filenamePattern": "*.cscratch"
+						"filenamePattern": "*.silky.element"
+					}
+				]
+			},
+						{
+				"viewType": "silky.fact",
+				"displayName": "Silky Fact",
+				"selector": [
+					{
+						"filenamePattern": "*.silky.fact"
+					}
+				]
+			},
+						{
+				"viewType": "silky.snippet",
+				"displayName": "Silky SNippet",
+				"selector": [
+					{
+						"filenamePattern": "*.silky.snippet"
+					}
+				]
+			},
+						{
+				"viewType": "silky.thread",
+				"displayName": "Silky Thread",
+				"selector": [
+					{
+						"filenamePattern": "*.silky.thread"
 					}
 				]
 			},
 			{
-				"viewType": "catCustoms.pawDraw",
-				"displayName": "Paw Draw",
+				"viewType": "silky.web",
+				"displayName": "Silky Web",
 				"selector": [
 					{
-						"filenamePattern": "*.pawdraw"
+						"filenamePattern": "*.silky.web"
 					}
 				]
 			}
+			
 		],
 		"commands": [
-			{
-				"command": "catCustoms.pawDraw.new",
-				"title": "Create new Paw Draw Document",
-				"category": "Paw Draw"
-			}
 		]
 	},
 	"scripts": {

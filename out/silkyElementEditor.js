@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CatScratchEditorProvider = void 0;
+exports.SilkyElementEditorProvider = void 0;
 const vscode = require("vscode");
 const util_1 = require("./util");
 /**
@@ -15,14 +15,14 @@ const util_1 = require("./util");
  * - Loading scripts and styles in a custom editor.
  * - Synchronizing changes between a text document and a custom editor.
  */
-class CatScratchEditorProvider {
+class SilkyElementEditorProvider {
+    static register(context) {
+        const provider = new SilkyElementEditorProvider(context);
+        const providerRegistration = vscode.window.registerCustomEditorProvider(SilkyElementEditorProvider.viewType, provider);
+        return providerRegistration;
+    }
     constructor(context) {
         this.context = context;
-    }
-    static register(context) {
-        const provider = new CatScratchEditorProvider(context);
-        const providerRegistration = vscode.window.registerCustomEditorProvider(CatScratchEditorProvider.viewType, provider);
-        return providerRegistration;
     }
     /**
      * Called when our custom editor is opened.
@@ -75,10 +75,9 @@ class CatScratchEditorProvider {
      */
     getHtmlForWebview(webview) {
         // Local path to script and css for the webview
-        const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'catScratch.js'));
-        const styleResetUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'reset.css'));
+        const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'silkyElement.js'));
         const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'vscode.css'));
-        const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'catScratch.css'));
+        const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this.context.extensionUri, 'media', 'silkyElement.css'));
         // Use a nonce to whitelist which scripts can be run
         const nonce = (0, util_1.getNonce)();
         return /* html */ `
@@ -95,19 +94,14 @@ class CatScratchEditorProvider {
 
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-				<link href="${styleResetUri}" rel="stylesheet" />
 				<link href="${styleVSCodeUri}" rel="stylesheet" />
 				<link href="${styleMainUri}" rel="stylesheet" />
 
-				<title>Cat Scratch</title>
+				<title>Silky Element</title>
 			</head>
 			<body>
-				<div class="notes">
-					<div class="add-button">
-						<button>Scratch!</button>
-					</div>
+				<div class="content">
 				</div>
-				
 				<script nonce="${nonce}" src="${scriptUri}"></script>
 			</body>
 			</html>`;
@@ -117,7 +111,7 @@ class CatScratchEditorProvider {
      */
     addNewScratch(document) {
         const json = this.getDocumentAsJson(document);
-        const character = CatScratchEditorProvider.scratchCharacters[Math.floor(Math.random() * CatScratchEditorProvider.scratchCharacters.length)];
+        const character = SilkyElementEditorProvider.scratchCharacters[Math.floor(Math.random() * SilkyElementEditorProvider.scratchCharacters.length)];
         json.scratches = [
             ...(Array.isArray(json.scratches) ? json.scratches : []),
             {
@@ -165,7 +159,7 @@ class CatScratchEditorProvider {
         return vscode.workspace.applyEdit(edit);
     }
 }
-exports.CatScratchEditorProvider = CatScratchEditorProvider;
-CatScratchEditorProvider.viewType = 'catCustoms.catScratch';
-CatScratchEditorProvider.scratchCharacters = ['😸', '😹', '😺', '😻', '😼', '😽', '😾', '🙀', '😿', '🐱'];
-//# sourceMappingURL=catScratchEditor.js.map
+exports.SilkyElementEditorProvider = SilkyElementEditorProvider;
+SilkyElementEditorProvider.viewType = 'silky.element';
+SilkyElementEditorProvider.scratchCharacters = ['😸', '😹', '😺', '😻', '😼', '😽', '😾', '🙀', '😿', '🐱'];
+//# sourceMappingURL=silkyElementEditor.js.map
