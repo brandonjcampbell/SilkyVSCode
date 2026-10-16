@@ -1,14 +1,14 @@
 {
-	"name": "cat-customs",
-	"displayName": "Cat Customs",
-	"description": "Custom Editor API Samples",
+	"name": "silky-vscode",
+	"displayName": "Silky",
+	"description": "Custom editors for Silky story-graph files (.silky.element/.fact/.snippet/.thread)",
 	"version": "0.0.1",
-	"publisher": "vscode-samples",
+	"publisher": "brandonjcampbell",
 	"private": true,
-	"license": "MIT",
+	"license": "Apache-2.0",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-extension-samples"
+		"url": "https://github.com/brandonjcampbell/SilkyVSCode"
 	},
 	"engines": {
 		"vscode": "^1.74.0"
@@ -40,7 +40,7 @@
 			},
 						{
 				"viewType": "silky.snippet",
-				"displayName": "Silky SNippet",
+				"displayName": "Silky Snippet",
 				"selector": [
 					{
 						"filenamePattern": "*.silky.snippet"

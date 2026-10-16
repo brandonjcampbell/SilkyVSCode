@@ -15,7 +15,7 @@ Only the Element editor (`src/silkyElementEditor.ts`, `media/silkyElement.*`) go
 
 ## Status
 
-Abandoned in favor of the Electron app. Kept for reference. The scaffold is Microsoft's [custom-editor-sample](https://github.com/microsoft/vscode-extension-samples/tree/main/custom-editor-sample), which is why `package.json` still carries its name and publisher.
+Abandoned in favor of the Electron app. Kept for reference. The scaffold is Microsoft's [custom-editor-sample](https://github.com/microsoft/vscode-extension-samples/tree/main/custom-editor-sample), with the package metadata since renamed.
 
 ## Running it
 
