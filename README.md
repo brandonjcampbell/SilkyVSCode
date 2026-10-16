@@ -1,25 +1,27 @@
-# Cat Customs - Custom Editor API Samples
+# Silky for VS Code
 
-![Paw draw editor ](documentation/example.png)
+An early experiment (Dec 2022) at bringing [Silky](https://github.com/brandonjcampbell/Silky) — the graph-native story-planning tool — into VS Code as a set of custom editors.
 
-Demonstrates VS Code's [custom editor API](https://code.visualstudio.com/api/extension-guides/custom-editors) using two custom editors:
+The idea: a Silky project is a folder of JSON files, so instead of a standalone Electron app, register a VS Code custom editor for each actor type and let writers work on their story graph inside the editor they already use. The extension registers four custom text editors:
 
-- Cat Scratch — Uses the finalized custom text editor api to provide a custom editor for `.cscratch` files (which are just json files)
-- Paw Draw - Uses the binary custom editor api to provide a custom editor for `.pawdraw` files (which are just png files with a different file extension).
+| File pattern | Editor |
+|---|---|
+| `*.silky.element` | Element — a character, place, or thing |
+| `*.silky.fact` | Fact — something true in the world |
+| `*.silky.snippet` | Snippet — a unit of prose |
+| `*.silky.thread` | Thread — an ordered sequence of snippets |
 
-## VS Code API
+Only the Element editor (`src/silkyElementEditor.ts`, `media/silkyElement.*`) got real work; the others are registered but stubbed.
 
-### `vscode` module
+## Status
 
-- [`window.registerCustomEditorProvider`](https://code.visualstudio.com/api/references/vscode-api#window.registerCustomEditorProvider)
-- [`CustomTextEditor`](https://code.visualstudio.com/api/references/vscode-api#CustomTextEditor)
-- [`CustomEditor`](https://code.visualstudio.com/api/references/vscode-api#CustomEditor)
+Abandoned in favor of the Electron app. Kept for reference. The scaffold is Microsoft's [custom-editor-sample](https://github.com/microsoft/vscode-extension-samples/tree/main/custom-editor-sample), which is why `package.json` still carries its name and publisher.
 
-## Running the example
+## Running it
 
-- Open this example in VS Code 1.46+
-- `npm install`
-- `npm run watch` or `npm run compile`
-- `F5` to start debugging
+```bash
+npm install
+npm run compile
+```
 
-Open the example files from the `exampleFiles` directory.
+Then F5 in VS Code to launch an Extension Development Host and open a `.silky.element` file.
